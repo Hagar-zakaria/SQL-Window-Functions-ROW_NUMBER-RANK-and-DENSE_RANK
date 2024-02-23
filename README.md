@@ -24,6 +24,7 @@ Let’s assign employees with new employee IDs in descending order according to 
 SELECT *, ROW_NUMBER() OVER(ORDER BY salary DESC) AS new_employee_id
 FROM employees;
 ```
+![image](https://github.com/Hagar-zakaria/SQL-Window-Functions-ROW_NUMBER-RANK-and-DENSE_RANK/assets/93611934/06ddcbd9-469a-4040-86f9-50f0d52eba35)
 
 Let’s rank employees based on their salaries in descending order, and divide the result set into partitions based on the ‘position’ column.
 
@@ -31,6 +32,7 @@ Let’s rank employees based on their salaries in descending order, and divide t
 SELECT *, ROW_NUMBER() OVER(ORDER BY salary DESC) AS new_employee_id
 FROM employees;
 ```
+![image](https://github.com/Hagar-zakaria/SQL-Window-Functions-ROW_NUMBER-RANK-and-DENSE_RANK/assets/93611934/e5e46b97-af80-4d96-91df-430c56dd1ba1)
 
 ## 2. RANK Function
 The RANK() function assigns a unique rank to each row based on the values in one or more columns. Rows with the same values receive the same rank, and the next rank is skipped. It’s useful when you want to create a ranking with gaps.
@@ -50,6 +52,7 @@ Let’s rank employees in descending order according to their salaries:
 SELECT * , RANK() OVER(ORDER BY salary DESC) AS salary_rank
 FROM employees;
 ```
+![image](https://github.com/Hagar-zakaria/SQL-Window-Functions-ROW_NUMBER-RANK-and-DENSE_RANK/assets/93611934/11981535-a3e9-4fc0-890f-c17423692da2)
 
 ## 3. DENSE_RANK Function : Grouping Items with the Same Rank
 DENSE_RANK() is useful when you want to group items with the same rank together. Rows with the same values receive the same rank, and the next rank is not skipped. This function is helpful when you want to create a ranking without gaps.
@@ -69,6 +72,7 @@ Let’s say we want to rank book titles by their prices and group titles with th
 SELECT title, price, DENSE_RANK() OVER(ORDER BY price DESC) as 'rank'
 FROM titles;
 ```
+![image](https://github.com/Hagar-zakaria/SQL-Window-Functions-ROW_NUMBER-RANK-and-DENSE_RANK/assets/93611934/14ac7d31-a722-4dbb-a658-5eb1497eec1c)
 
 Let’s divide the result set into partitions based on the ‘type’ column.
 
@@ -76,6 +80,7 @@ Let’s divide the result set into partitions based on the ‘type’ column.
 SELECT title, price, type, DENSE_RANK() OVER(PARTITION BY type ORDER BY price DESC) as 'rank'
 FROM titles;
 ```
+![image](https://github.com/Hagar-zakaria/SQL-Window-Functions-ROW_NUMBER-RANK-and-DENSE_RANK/assets/93611934/687de12b-9849-456f-bd94-5347cc8b79da)
 
 Suppose we have a table called “titles” with columns “title” and “ytd_sales”. To identify the top-performing books, we can use the following query:
 
@@ -83,6 +88,7 @@ Suppose we have a table called “titles” with columns “title” and “ytd_
 SELECT title, ytd_sales, DENSE_RANK() OVER(ORDER BY ytd_sales DESC) as 'rank'
 FROM titles;
 ```
+![image](https://github.com/Hagar-zakaria/SQL-Window-Functions-ROW_NUMBER-RANK-and-DENSE_RANK/assets/93611934/9fd3305e-eee7-497a-8d1b-5b629c541610)
 
 Let’s divide the result set into partitions based on the ‘type’ column.
 
@@ -90,6 +96,7 @@ Let’s divide the result set into partitions based on the ‘type’ column.
 SELECT title, ytd_sales, type, DENSE_RANK() OVER(PARTITION BY type ORDER BY ytd_sales DESC) as 'rank'
 FROM titles;
 ```
+![image](https://github.com/Hagar-zakaria/SQL-Window-Functions-ROW_NUMBER-RANK-and-DENSE_RANK/assets/93611934/9e8b951f-3746-43d0-993a-5641bf8c243d)
 
 Combining All Three Functions
 Consider a scenario where you have a list of employees with their salaries, and you want to assign a unique employee ID, rank them by salary, and assign a dense rank.
